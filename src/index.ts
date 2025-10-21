@@ -154,7 +154,7 @@ async function handleChatRequest(request: Request, env: Env): Promise<Response> 
       },
     );
 
-    // 🔍 Check if the response was blocked by Guardrails (e.g., HTTP 424)
+    // Check if the response was blocked by Guardrails (e.g., HTTP 424)
     if (!aiResponse.ok) {
       let userMessage = "An error occurred while processing your request.";
       try {
@@ -174,7 +174,7 @@ async function handleChatRequest(request: Request, env: Env): Promise<Response> 
       });
     }
 
-    // ✅ Stream the AI response using SSE format
+    // Stream the AI response using SSE format
     const { readable, writable } = new TransformStream();
     const writer = writable.getWriter();
     const reader = aiResponse.body?.getReader();
